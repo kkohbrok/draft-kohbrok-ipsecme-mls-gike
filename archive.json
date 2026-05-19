@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-05-17T00:29:54.872975+00:00",
+  "timestamp": "2026-05-19T00:33:43.289021+00:00",
   "repo": "kkohbrok/draft-kohbrok-ipsecme-mls-gike",
   "labels": [
     {
@@ -50,5 +50,32 @@
     }
   ],
   "issues": [],
-  "pulls": []
+  "pulls": [
+    {
+      "number": 1,
+      "id": "PR_kwDOSaLcns7cs039",
+      "title": "Distinguish sender/receiver roles",
+      "url": "https://github.com/kkohbrok/draft-kohbrok-ipsecme-mls-gike/pull/1",
+      "state": "OPEN",
+      "author": "kkohbrok",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-05-18T14:53:47Z",
+      "updatedAt": "2026-05-18T14:53:47Z",
+      "baseRepository": "kkohbrok/draft-kohbrok-ipsecme-mls-gike",
+      "baseRefName": "main",
+      "baseRefOid": "29b3848e17af0b17ab769ffa8ebe99f3bcf5ed7c",
+      "headRepository": "kkohbrok/draft-kohbrok-ipsecme-mls-gike",
+      "headRefName": "konrad/group_senders",
+      "headRefOid": "5775c5b59b36b89d32445318c979db8d44a6ba65",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    }
+  ]
 }
