@@ -1372,10 +1372,11 @@ Members can refresh their own MLS contribution by sending an empty Commit with a
 <p id="section-4-3">New members join through Add plus Welcome.
 This profile does not define joining through External Commit, as defined in Section 12.4.3.2 of <span>[<a href="#RFC9420" class="cite xref">RFC9420</a>]</span>.
 OPEN QUESTION: Should External Commit be specified for joining, resynchronization, or both, and what GCKS validation is required?<a href="#section-4-3" class="pilcrow">¶</a></p>
-<p id="section-4-4">All GMs are both senders and receivers.
-There is no sender/receiver role split in this profile.
-Because all GMs can send on the same group Data-Security SA, this draft keeps the Sender-ID machinery of G-IKEv2 for counter-based ESP modes.
-TODO: Define sender/receiver authorization for deployments with receive-only or send-only members.<a href="#section-4-4" class="pilcrow">¶</a></p>
+<p id="section-4-4">MLS membership is distinct from data-plane sender authorization.
+A GM that intends to send ESP traffic on a Data-Security SA indicates that role with the <code>GROUP_SENDER</code> notification defined in Section 4.7.4 of <span>[<a href="#RFC9838" class="cite xref">RFC9838</a>]</span>.
+A GM that does not request sender authorization can still join the MLS group and derive the epoch's Data-Security SA keys, but it is not authorized to emit ESP traffic for that SA.
+This draft keeps the Sender-ID machinery of G-IKEv2 for authorized senders using counter-based ESP modes.
+This is G-IKEv2 policy authorization and nonce-space partitioning, not per-sender traffic-key separation.<a href="#section-4-4" class="pilcrow">¶</a></p>
 <p id="section-4-5">The GCKS is a single instance for a group.
 GCKS replication and failover are out of scope.<a href="#section-4-5" class="pilcrow">¶</a></p>
 <p id="section-4-6">The group uses one current ESP Data-Security SA per MLS epoch for the relevant group traffic selectors.
@@ -1515,13 +1516,12 @@ The uploaded GroupInfo becomes the GCKS baseline for public tracked state.<a hre
 <a href="#section-8" class="section-number selfRef">8. </a><a href="#name-registration" class="section-name selfRef">Registration</a>
       </h2>
 <p id="section-8-1">A Candidate GM authenticates to the GCKS using the same IKEv2 authentication machinery used by G-IKEv2.
-The request carries <code>IDg</code>, a <code>GROUP_SENDER</code> notification, an <code>MLS_KEY_PACKAGE</code>, and an optional <code>MLS_VERSION</code> notification.
-Every GM sends <code>GROUP_SENDER</code> because this profile treats every GM as both a sender and a receiver.<a href="#section-8-1" class="pilcrow">¶</a></p>
+The request carries <code>IDg</code>, an <code>MLS_KEY_PACKAGE</code>, an optional <code>MLS_VERSION</code> notification, and a <code>GROUP_SENDER</code> notification only if the GM intends to send Data-Security SA traffic.<a href="#section-8-1" class="pilcrow">¶</a></p>
 <p id="section-8-2">The <code>MLS_KEY_PACKAGE</code> payload contains an MLS KeyPackage.
 The identity in the KeyPackage LeafNode credential <span class="bcp14">MUST</span> be bound to the IKE identity authenticated in the exchange.
 For example, a basic credential identity can equal <code>IDi</code>, or an X.509 credential can contain a subjectAltName matching <code>IDi</code>.<a href="#section-8-2" class="pilcrow">¶</a></p>
 <p id="section-8-3">The GCKS response carries a GSA payload that describes policy but is not installable as a Data-Security SA.
-If the Data-Security SA uses a counter-based ESP mode, the response also carries a KD Member Key Bag containing one or more <code>GM_SENDER_ID</code> attributes as specified by Section 4.5.3.3 of <span>[<a href="#RFC9838" class="cite xref">RFC9838</a>]</span>.
+If the GM requested sender authorization and the Data-Security SA uses a counter-based ESP mode, the response also carries a KD Member Key Bag containing one or more <code>GM_SENDER_ID</code> attributes as specified by Section 4.5.3.3 of <span>[<a href="#RFC9838" class="cite xref">RFC9838</a>]</span>.
 The response does not carry MLS group state unless the group is empty and the candidate is becoming the founder.
 The candidate is not yet in an MLS epoch from which it can derive traffic keys.
 Any SPI carried in that GSA is tentative until the GSA for the accepted MLS epoch is delivered.
@@ -1675,7 +1675,10 @@ This is necessary because two exporter outputs can be valid during GWP_ATD and G
 Receivers need the SPI to distinguish packets protected with the old epoch key from packets protected with the new epoch key.<a href="#section-12-6" class="pilcrow">¶</a></p>
 <p id="section-12-7">For counter-based ESP modes, this draft inherits the Sender-ID rules from Section 2.5 of <span>[<a href="#RFC9838" class="cite xref">RFC9838</a>]</span>.
 The GCKS includes <code>GWP_SENDER_ID_BITS</code> when required by Section 4.4.3.1.2 of <span>[<a href="#RFC9838" class="cite xref">RFC9838</a>]</span>.
-It allocates <code>GM_SENDER_ID</code> values in the KD Member Key Bag when required by Section 4.5.3.3 of <span>[<a href="#RFC9838" class="cite xref">RFC9838</a>]</span>.
+A GM authorized as a receiver installs the Data-Security SA inbound.
+A GM authorized as a sender installs the Data-Security SA outbound and uses its assigned Sender-ID bits when constructing ESP nonces.
+The GCKS allocates <code>GM_SENDER_ID</code> values in the KD Member Key Bag for authorized senders when required by Section 4.5.3.3 of <span>[<a href="#RFC9838" class="cite xref">RFC9838</a>]</span>.
+A GM that is not authorized as a sender <span class="bcp14">MUST NOT</span> install the Data-Security SA outbound.
 Implicit-IV ESP transforms remain prohibited for multi-sender Data-Security SAs as described in Section 2.7 of <span>[<a href="#RFC9838" class="cite xref">RFC9838</a>]</span>.<a href="#section-12-7" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1741,7 +1744,8 @@ This exposes MLS handshake metadata to the GCKS, which is already the G-IKEv2 co
 The messages are still confidentiality-protected on the wire by the IKEv2 <code>SK{}</code> envelope between each GM and the GCKS.<a href="#section-14-6" class="pilcrow">¶</a></p>
 <p id="section-14-7">The Sender-ID mechanism remains security-critical for multi-sender ESP with counter-based modes.
 Reusing MLS exporter output without Sender-ID partitioning would risk key and nonce reuse.
-This draft therefore keeps <code>GROUP_SENDER</code>, <code>GWP_SENDER_ID_BITS</code>, and <code>GM_SENDER_ID</code> where required by <span>[<a href="#RFC9838" class="cite xref">RFC9838</a>]</span>.<a href="#section-14-7" class="pilcrow">¶</a></p>
+This draft therefore keeps <code>GROUP_SENDER</code>, <code>GWP_SENDER_ID_BITS</code>, and <code>GM_SENDER_ID</code> where required by <span>[<a href="#RFC9838" class="cite xref">RFC9838</a>]</span> for authorized senders.
+Because this profile uses a shared Data-Security SA key, receiver-only authorization is enforced as local IPsec policy and GCKS authorization, not by withholding the ESP traffic key from receivers.<a href="#section-14-7" class="pilcrow">¶</a></p>
 <p id="section-14-8">Every accepted MLS epoch uses a fresh Data-Security SA SPI.
 This lets receivers distinguish old-key and new-key packets during the activation and deactivation overlap controlled by GWP_ATD and GWP_DTD.<a href="#section-14-8" class="pilcrow">¶</a></p>
 <p id="section-14-9">Removal has a residual acceptance window during that overlap.
