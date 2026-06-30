@@ -3,9 +3,11 @@
 
 
 IP Security Maintenance and Extensions                        K. Kohbrok
-Internet-Draft                                               Phoenix R&D
-Intended status: Informational                               13 May 2026
-Expires: 14 November 2026
+Internet-Draft                                                 R. Robert
+Intended status: Informational                               Phoenix R&D
+Expires: 1 January 2027                                       V. Smyslov
+                                                              ELVIS-PLUS
+                                                            30 June 2026
 
 
                     MLS for IPsec Group Key Exchange
@@ -57,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 14 November 2026.
+   This Internet-Draft will expire on 1 January 2027.
 
 Copyright Notice
 
@@ -94,7 +96,7 @@ Table of Contents
    17. References
      17.1.  Normative References
      17.2.  Informative References
-   Author's Address
+   Authors' Addresses
 
 1.  Introduction
 
@@ -782,8 +784,18 @@ Table of Contents
               Architecture", RFC 9750, DOI 10.17487/RFC9750, April 2025,
               <https://www.rfc-editor.org/rfc/rfc9750>.
 
-Author's Address
+Authors' Addresses
 
    Konrad Kohbrok
    Phoenix R&D
    Email: konrad@ratchet.ing
+
+
+   Raphael Robert
+   Phoenix R&D
+   Email: ietf@raphaelrobert.com
+
+
+   Valery Smyslov
+   ELVIS-PLUS
+   Email: svan@elvis.ru
