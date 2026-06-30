@@ -5,9 +5,9 @@
 IP Security Maintenance and Extensions                        K. Kohbrok
 Internet-Draft                                                 R. Robert
 Intended status: Informational                               Phoenix R&D
-Expires: 31 December 2026                                     V. Smyslov
-                                                              Elvis Plus
-                                                            29 June 2026
+Expires: 1 January 2027                                       V. Smyslov
+                                                              ELVIS-PLUS
+                                                            30 June 2026
 
 
                     MLS for IPsec Group Key Exchange
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 31 December 2026.
+   This Internet-Draft will expire on 1 January 2027.
 
 Copyright Notice
 
@@ -797,5 +797,5 @@ Authors' Addresses
 
 
    Valery Smyslov
-   Elvis Plus
-   Email: valery@smyslov.net
+   ELVIS-PLUS
+   Email: svan@elvis.ru
