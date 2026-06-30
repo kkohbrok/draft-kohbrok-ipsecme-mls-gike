@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-05-31T00:34:49.354247+00:00",
+  "timestamp": "2026-06-30T00:34:44.654637+00:00",
   "repo": "kkohbrok/draft-kohbrok-ipsecme-mls-gike",
   "labels": [
     {
@@ -423,6 +423,72 @@
               "body": "True, but needs clarification. The Rekey SA keys are always generated and provided exclusively by the GCKS (as well as all wrap keys for LKH). This is from G-IKEv2 and is not changed. The second part is obvious and does not depend on whether multicast rekey or inband rekey is used.",
               "createdAt": "2026-05-21T14:14:12Z",
               "updatedAt": "2026-05-21T14:14:12Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "id": "PR_kwDOSaLcns7r1Sk_",
+      "title": "Add authors",
+      "url": "https://github.com/kkohbrok/draft-kohbrok-ipsecme-mls-gike/pull/7",
+      "state": "OPEN",
+      "author": "kkohbrok",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-06-29T14:52:19Z",
+      "updatedAt": "2026-06-29T15:18:59Z",
+      "baseRepository": "kkohbrok/draft-kohbrok-ipsecme-mls-gike",
+      "baseRefName": "main",
+      "baseRefOid": "29b3848e17af0b17ab769ffa8ebe99f3bcf5ed7c",
+      "headRepository": "kkohbrok/draft-kohbrok-ipsecme-mls-gike",
+      "headRefName": "konrad/more_authors",
+      "headRefOid": "762abfc8d23cfe5f098076b831883e2bf4e92699",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOSaLcns8AAAABEcLC6A",
+          "commit": {
+            "abbreviatedOid": "762abfc"
+          },
+          "author": "raphaelrobert",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-06-29T15:00:46Z",
+          "updatedAt": "2026-06-29T15:00:46Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOSaLcns8AAAABEcSFKA",
+          "commit": {
+            "abbreviatedOid": "762abfc"
+          },
+          "author": "smyslov",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-06-29T15:15:57Z",
+          "updatedAt": "2026-06-29T15:18:59Z",
+          "comments": [
+            {
+              "originalPosition": 11,
+              "body": "```suggestion\n    email: svan@elvis.ru\n```\nThis is my work e-mail, I use it in RFCs, so that my employer can do  PR actions. Anyway, they pay for my trips to IETF meetings. ",
+              "createdAt": "2026-06-29T15:15:57Z",
+              "updatedAt": "2026-06-29T15:18:59Z"
+            },
+            {
+              "originalPosition": 10,
+              "body": "```suggestion\n    organization: ELVIS-PLUS\n```\nMore official name",
+              "createdAt": "2026-06-29T15:18:17Z",
+              "updatedAt": "2026-06-29T15:18:59Z"
             }
           ]
         }
