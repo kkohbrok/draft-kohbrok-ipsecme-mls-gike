@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-06-30T00:34:44.654637+00:00",
+  "timestamp": "2026-07-02T00:35:16.671614+00:00",
   "repo": "kkohbrok/draft-kohbrok-ipsecme-mls-gike",
   "labels": [
     {
@@ -113,25 +113,35 @@
       "id": "PR_kwDOSaLcns7cs039",
       "title": "Distinguish sender/receiver roles",
       "url": "https://github.com/kkohbrok/draft-kohbrok-ipsecme-mls-gike/pull/1",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "kkohbrok",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2026-05-18T14:53:47Z",
-      "updatedAt": "2026-05-18T14:53:47Z",
+      "updatedAt": "2026-06-30T14:04:57Z",
       "baseRepository": "kkohbrok/draft-kohbrok-ipsecme-mls-gike",
       "baseRefName": "main",
       "baseRefOid": "29b3848e17af0b17ab769ffa8ebe99f3bcf5ed7c",
       "headRepository": "kkohbrok/draft-kohbrok-ipsecme-mls-gike",
       "headRefName": "konrad/group_senders",
       "headRefOid": "5775c5b59b36b89d32445318c979db8d44a6ba65",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "closedAt": "2026-06-30T14:04:57Z",
+      "mergedAt": "2026-06-30T14:04:57Z",
+      "mergedBy": "kkohbrok",
+      "mergeCommit": {
+        "oid": "37099b0d0a539f145567fa3649035ec87d61f566"
+      },
+      "comments": [
+        {
+          "author": "smyslov",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I believe this PR is ready to merge.",
+          "createdAt": "2026-06-30T14:01:38Z",
+          "updatedAt": "2026-06-30T14:01:38Z"
+        }
+      ],
       "reviews": []
     },
     {
@@ -139,25 +149,42 @@
       "id": "PR_kwDOSaLcns7c-TQD",
       "title": "Reuse G-IKEv2 payloads",
       "url": "https://github.com/kkohbrok/draft-kohbrok-ipsecme-mls-gike/pull/2",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "kkohbrok",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2026-05-19T08:01:15Z",
-      "updatedAt": "2026-05-20T15:37:47Z",
+      "updatedAt": "2026-06-30T14:28:19Z",
       "baseRepository": "kkohbrok/draft-kohbrok-ipsecme-mls-gike",
-      "baseRefName": "konrad/group_senders",
-      "baseRefOid": "5775c5b59b36b89d32445318c979db8d44a6ba65",
+      "baseRefName": "main",
+      "baseRefOid": "37099b0d0a539f145567fa3649035ec87d61f566",
       "headRepository": "kkohbrok/draft-kohbrok-ipsecme-mls-gike",
       "headRefName": "konrad/fewer_payloads",
       "headRefOid": "7f2a44c5097de760bcca268c24b70fe5d7ca55e2",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "closedAt": "2026-06-30T14:28:19Z",
+      "mergedAt": "2026-06-30T14:28:19Z",
+      "mergedBy": "kkohbrok",
+      "mergeCommit": {
+        "oid": "76260d81b9e49c48cef8df86508c7535f175f93c"
+      },
+      "comments": [
+        {
+          "author": "smyslov",
+          "authorAssociation": "COLLABORATOR",
+          "body": "There are quite a lot of changes, it's a bit difficult to track all of them. Some of my comments above may require additional discussion. Perhaps for now it is best to merge the PR \"as is\" with an intention to discuss the possible further changes and if we agree on them, then create anothe PR.\r\n\r\nIn particular (topics for discussion):\r\n1. I think, that KD payloads should only be sent by the GCKS to GMs and not bt GMs to the GCKS.\r\n2. I think that we can re-use the existing registry for G-IKEv2 attributes and place each MLS object into its own attribute. Otherwise a separate registry is needed or MLS registry should be re-used (if any).\r\n3. Perhaps it is worth to allocate a new IKE exchange type for requesting commit from a GM and hot use GSA_INBAND_REKEY for this.",
+          "createdAt": "2026-06-30T14:16:19Z",
+          "updatedAt": "2026-06-30T14:16:19Z"
+        },
+        {
+          "author": "kkohbrok",
+          "authorAssociation": "OWNER",
+          "body": "Okay, then I'll merge both PRs for now. Since you're the expert on (G-)IKEv2, maybe it would be best if you were to do a PR with your proposals and then we can discuss based on that? They all sound reasonable, so while I will have to read up more on conventions in the existing drafts and RFCs, it's probably safe to just make those changes and sort any details out in v2, i.e. after the submission",
+          "createdAt": "2026-06-30T14:28:00Z",
+          "updatedAt": "2026-06-30T14:28:00Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOSaLcns8AAAABAeMXYQ",
@@ -165,7 +192,7 @@
             "abbreviatedOid": "67bcbb6"
           },
           "author": "smyslov",
-          "authorAssociation": "NONE",
+          "authorAssociation": "COLLABORATOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2026-05-20T08:33:49Z",
@@ -185,7 +212,7 @@
             "abbreviatedOid": "67bcbb6"
           },
           "author": "smyslov",
-          "authorAssociation": "NONE",
+          "authorAssociation": "COLLABORATOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2026-05-20T08:35:39Z",
@@ -205,7 +232,7 @@
             "abbreviatedOid": "67bcbb6"
           },
           "author": "smyslov",
-          "authorAssociation": "NONE",
+          "authorAssociation": "COLLABORATOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2026-05-20T08:40:36Z",
@@ -225,7 +252,7 @@
             "abbreviatedOid": "67bcbb6"
           },
           "author": "smyslov",
-          "authorAssociation": "NONE",
+          "authorAssociation": "COLLABORATOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2026-05-20T08:41:42Z",
@@ -245,7 +272,7 @@
             "abbreviatedOid": "67bcbb6"
           },
           "author": "smyslov",
-          "authorAssociation": "NONE",
+          "authorAssociation": "COLLABORATOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2026-05-20T08:54:15Z",
@@ -265,7 +292,7 @@
             "abbreviatedOid": "67bcbb6"
           },
           "author": "smyslov",
-          "authorAssociation": "NONE",
+          "authorAssociation": "COLLABORATOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2026-05-20T11:52:36Z",
@@ -286,25 +313,35 @@
       "id": "PR_kwDOSaLcns7d0adT",
       "title": "Multicast GSA_REKEY with optional LKH protection",
       "url": "https://github.com/kkohbrok/draft-kohbrok-ipsecme-mls-gike/pull/4",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "kkohbrok",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "Fixes #3 ",
       "createdAt": "2026-05-21T06:32:30Z",
-      "updatedAt": "2026-05-21T14:14:12Z",
+      "updatedAt": "2026-06-30T14:28:34Z",
       "baseRepository": "kkohbrok/draft-kohbrok-ipsecme-mls-gike",
       "baseRefName": "konrad/fewer_payloads",
       "baseRefOid": "7f2a44c5097de760bcca268c24b70fe5d7ca55e2",
       "headRepository": "kkohbrok/draft-kohbrok-ipsecme-mls-gike",
       "headRefName": "konrad/lkh_for_rekey_multicast",
       "headRefOid": "3a6cd85233b5ddca2f258b278fc1b80cd5f363fd",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "closedAt": "2026-06-30T14:28:33Z",
+      "mergedAt": "2026-06-30T14:28:33Z",
+      "mergedBy": "kkohbrok",
+      "mergeCommit": {
+        "oid": "c9925202437b06c9c0cf13207752f465398fdd4a"
+      },
+      "comments": [
+        {
+          "author": "smyslov",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Again, perhaps the best is to merge the PR \"as is\" and then do some refining pass if needed.",
+          "createdAt": "2026-06-30T14:22:47Z",
+          "updatedAt": "2026-06-30T14:22:47Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOSaLcns8AAAABAog6JA",
@@ -312,7 +349,7 @@
             "abbreviatedOid": "3a6cd85"
           },
           "author": "smyslov",
-          "authorAssociation": "NONE",
+          "authorAssociation": "COLLABORATOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2026-05-21T13:46:24Z",
@@ -332,7 +369,7 @@
             "abbreviatedOid": "3a6cd85"
           },
           "author": "smyslov",
-          "authorAssociation": "NONE",
+          "authorAssociation": "COLLABORATOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2026-05-21T13:52:46Z",
@@ -352,7 +389,7 @@
             "abbreviatedOid": "3a6cd85"
           },
           "author": "smyslov",
-          "authorAssociation": "NONE",
+          "authorAssociation": "COLLABORATOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2026-05-21T13:55:31Z",
@@ -372,7 +409,7 @@
             "abbreviatedOid": "3a6cd85"
           },
           "author": "smyslov",
-          "authorAssociation": "NONE",
+          "authorAssociation": "COLLABORATOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2026-05-21T13:59:25Z",
@@ -392,7 +429,7 @@
             "abbreviatedOid": "3a6cd85"
           },
           "author": "smyslov",
-          "authorAssociation": "NONE",
+          "authorAssociation": "COLLABORATOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2026-05-21T14:11:01Z",
@@ -412,7 +449,7 @@
             "abbreviatedOid": "3a6cd85"
           },
           "author": "smyslov",
-          "authorAssociation": "NONE",
+          "authorAssociation": "COLLABORATOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2026-05-21T14:14:12Z",
@@ -433,24 +470,26 @@
       "id": "PR_kwDOSaLcns7r1Sk_",
       "title": "Add authors",
       "url": "https://github.com/kkohbrok/draft-kohbrok-ipsecme-mls-gike/pull/7",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "kkohbrok",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2026-06-29T14:52:19Z",
-      "updatedAt": "2026-06-29T15:18:59Z",
+      "updatedAt": "2026-06-30T06:06:03Z",
       "baseRepository": "kkohbrok/draft-kohbrok-ipsecme-mls-gike",
       "baseRefName": "main",
       "baseRefOid": "29b3848e17af0b17ab769ffa8ebe99f3bcf5ed7c",
       "headRepository": "kkohbrok/draft-kohbrok-ipsecme-mls-gike",
       "headRefName": "konrad/more_authors",
-      "headRefOid": "762abfc8d23cfe5f098076b831883e2bf4e92699",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "fd8da86acf9cd12aec47f6ddb331089e4275df22",
+      "closedAt": "2026-06-30T06:06:03Z",
+      "mergedAt": "2026-06-30T06:06:03Z",
+      "mergedBy": "kkohbrok",
+      "mergeCommit": {
+        "oid": "77e67920d7a1df1a5d1ce997377c37a640804f07"
+      },
       "comments": [],
       "reviews": [
         {
@@ -493,6 +532,34 @@
           ]
         }
       ]
+    },
+    {
+      "number": 8,
+      "id": "PR_kwDOSaLcns7sRVWa",
+      "title": "Multicast GSA_REKEY with optional LKH protection",
+      "url": "https://github.com/kkohbrok/draft-kohbrok-ipsecme-mls-gike/pull/8",
+      "state": "MERGED",
+      "author": "kkohbrok",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-06-30T14:34:55Z",
+      "updatedAt": "2026-06-30T14:35:06Z",
+      "baseRepository": "kkohbrok/draft-kohbrok-ipsecme-mls-gike",
+      "baseRefName": "main",
+      "baseRefOid": "76260d81b9e49c48cef8df86508c7535f175f93c",
+      "headRepository": "kkohbrok/draft-kohbrok-ipsecme-mls-gike",
+      "headRefName": "konrad/lkh_2",
+      "headRefOid": "26b7427927afe6a5293fc306527fd778507e456e",
+      "closedAt": "2026-06-30T14:35:06Z",
+      "mergedAt": "2026-06-30T14:35:06Z",
+      "mergedBy": "kkohbrok",
+      "mergeCommit": {
+        "oid": "fb5117d993f9a043fa538d3c0602ce4a9edf31f5"
+      },
+      "comments": [],
+      "reviews": []
     }
   ]
 }
