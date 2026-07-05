@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-07-02T00:35:16.671614+00:00",
+  "timestamp": "2026-07-05T02:22:13.284629+00:00",
   "repo": "kkohbrok/draft-kohbrok-ipsecme-mls-gike",
   "labels": [
     {
@@ -560,6 +560,278 @@
       },
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 9,
+      "id": "PR_kwDOSaLcns7tK56g",
+      "title": "Consistensy + few design proposals",
+      "url": "https://github.com/kkohbrok/draft-kohbrok-ipsecme-mls-gike/pull/9",
+      "state": "OPEN",
+      "author": "smyslov",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Mostly editorial changes to keep text consistent, but also few design proposals:\r\n1. Return MLS object to the candidate GM in the GSA_AUTH response on registration. Unless I'm missing something with MLS message sequencing, I think this is more streamlined, the GCKS just delays this response until it contacts the designated GM and receives the commit message.\r\n2. Remove any explicit policy for selecting the designated GM/ Afterall, this is a GCKS' local matter. In particular, one of the condition is that there is a persistent unicast IKE SA from this GM to GCKS\r\n3. Add a limitation that only GMs acting as senders can request Path Refresh. I believe that this is reasonable for two reasons - usually senders are in a better position with regard to how often the key should be changed, sinse they know for sure how much traffic is protected using one key. In addition, there must be a persistent unicast IKE SA to the GCKS, and senders will have it often, as their rekeying must be reliable.\r\n4. Rename new exchanges to always start with GSA_ and to have a relatively short name.",
+      "createdAt": "2026-07-02T14:28:05Z",
+      "updatedAt": "2026-07-04T08:16:15Z",
+      "baseRepository": "kkohbrok/draft-kohbrok-ipsecme-mls-gike",
+      "baseRefName": "main",
+      "baseRefOid": "fb5117d993f9a043fa538d3c0602ce4a9edf31f5",
+      "headRepository": "smyslov/draft-kohbrok-ipsecme-mls-gike",
+      "headRefName": "main",
+      "headRefOid": "0eaeaf9d040b7fa1e1892128dd5b93ec3be587f9",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOSaLcns8AAAABE5HWnw",
+          "commit": {
+            "abbreviatedOid": "01bcff5"
+          },
+          "author": "kkohbrok",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "Looks good! Just a few comments.",
+          "createdAt": "2026-07-03T06:20:08Z",
+          "updatedAt": "2026-07-03T06:39:11Z",
+          "comments": [
+            {
+              "originalPosition": 84,
+              "body": "Sounds good to me. I think you can then remove [these lines](https://github.com/kkohbrok/draft-kohbrok-ipsecme-mls-gike/pull/9/changes#diff-20c57a601bb1c75d7985184dc7f07bd423afd635f539591ea273eb7fbf6063f5R643-R645) from the Security Considerations.",
+              "createdAt": "2026-07-03T06:20:08Z",
+              "updatedAt": "2026-07-03T06:39:11Z"
+            },
+            {
+              "originalPosition": 47,
+              "body": "Is this restriction really necessary? If we don't allow non-group sender to issue commits, those members can't update their MLS key material and thus don't gain post-compromise security.",
+              "createdAt": "2026-07-03T06:21:48Z",
+              "updatedAt": "2026-07-03T06:39:11Z"
+            },
+            {
+              "originalPosition": 240,
+              "body": "The intent here is to make sure that other GMs don't accept traffic from the removed GM anymore. Any idea for a good wording?\n\nMaybe something like\n\n> If that delivery is not possible, the GCKS needs another authenticated\n  mechanism, such as an IKE Delete or Notify, to ensure that the removed GM is\n  no longer authorized to participate in the group.  In particular, remaining\n  GMs need to stop accepting Data-Security SA traffic from the removed GM,\n  either by deleting the old SA, by applying receiver-side Sender-ID filtering,\n  or by another policy that prevents use of the removed GM's previous sending\n  authorization.",
+              "createdAt": "2026-07-03T06:38:40Z",
+              "updatedAt": "2026-07-03T06:39:11Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOSaLcns8AAAABE56P1A",
+          "commit": {
+            "abbreviatedOid": "01bcff5"
+          },
+          "author": "smyslov",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-03T08:18:12Z",
+          "updatedAt": "2026-07-03T08:18:12Z",
+          "comments": [
+            {
+              "originalPosition": 84,
+              "body": "Do you mean the text from Open Questions?\r\n\r\n   The designated committer policy needs review.  The policy specified\r\n   before uses the lowest non-blank eligible leaf because it is\r\n   deterministic and easy to specify\r\n\r\nOr am some other text? I failed to find related text in the Security Considerations...",
+              "createdAt": "2026-07-03T08:18:12Z",
+              "updatedAt": "2026-07-03T08:18:12Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOSaLcns8AAAABE57JcA",
+          "commit": {
+            "abbreviatedOid": "01bcff5"
+          },
+          "author": "kkohbrok",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-03T08:20:18Z",
+          "updatedAt": "2026-07-03T08:20:18Z",
+          "comments": [
+            {
+              "originalPosition": 84,
+              "body": "Sorry, the link doesn't seem to work. I meant these lines:\n\n> A designated committer can deny service by refusing to commit a GCKS-authored Proposal.\nThe mitigation specified here is for the GCKS to retry with another non-blank leaf.\nMore advanced committer selection and reputation policies are not specified in this document.",
+              "createdAt": "2026-07-03T08:20:18Z",
+              "updatedAt": "2026-07-03T08:20:18Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOSaLcns8AAAABE6BZdg",
+          "commit": {
+            "abbreviatedOid": "01bcff5"
+          },
+          "author": "smyslov",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-03T08:34:47Z",
+          "updatedAt": "2026-07-03T08:34:47Z",
+          "comments": [
+            {
+              "originalPosition": 47,
+              "body": "It is not absolutely necessary, but I have some arguments for this. \r\n\r\nSenders are usually more credible GMs and they are in a better position to count the traffic, so that they know when it's time to change the traffic key to not exceed maximum allowed amount of encrypted data per a key. In addition, if there are few senders (consider live broadcast scenario), then for GCKS it is preferrable to keep unicast IKE SA to them, which is required to request key update.\r\n\r\nOn the other hand, receiving-only GMs can go up and down (I'm again thinking about live broadcast) and cannot count the amount of traffic reliablly. In addition, for the same live broadcast use case there may be millions of passive GMs and the only way to deliver MLS objects to them is to use multicast Rekey SA. In this case the GCKS most likely will not keep millions unicast IKE SAs to these GMs, which makes impossible for them to request key update. \r\n\r\nI'm very much in doubt that in case the key is really compromise this event will be noticed by a host and any will be action taken upon, like key update, so in my opinion the only realistic scenario is to change the key proactively in a timly fashion, and for this senders are better suited.",
+              "createdAt": "2026-07-03T08:34:47Z",
+              "updatedAt": "2026-07-03T08:34:47Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOSaLcns8AAAABE6Cw7w",
+          "commit": {
+            "abbreviatedOid": "01bcff5"
+          },
+          "author": "smyslov",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-03T08:37:24Z",
+          "updatedAt": "2026-07-03T08:37:24Z",
+          "comments": [
+            {
+              "originalPosition": 84,
+              "body": "I think this text can retain, no need to delete it. Perhaps only the last sentence...",
+              "createdAt": "2026-07-03T08:37:24Z",
+              "updatedAt": "2026-07-03T08:37:24Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOSaLcns8AAAABE6FYkg",
+          "commit": {
+            "abbreviatedOid": "01bcff5"
+          },
+          "author": "smyslov",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-03T08:43:14Z",
+          "updatedAt": "2026-07-03T08:43:14Z",
+          "comments": [
+            {
+              "originalPosition": 240,
+              "body": "Perhaps I do not see a problem here. If MLS allows to remove GM from the group, the a new SA is created, which automatically deletes the current SA (after DTD). And the removed GM does not have keys for this new SA. Then it should be removed from GCKS' Rekey SA and LKH can be used for this. \n\nPerhaps the lack of explicit notification to the GM that it is removed is unplesant, but that is that - it's multicast.",
+              "createdAt": "2026-07-03T08:43:14Z",
+              "updatedAt": "2026-07-03T08:43:14Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOSaLcns8AAAABE6IPNA",
+          "commit": {
+            "abbreviatedOid": "01bcff5"
+          },
+          "author": "smyslov",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-03T08:49:43Z",
+          "updatedAt": "2026-07-03T08:49:43Z",
+          "comments": [
+            {
+              "originalPosition": 84,
+              "body": "I removed the last sentence and slightly modified the previous one.",
+              "createdAt": "2026-07-03T08:49:43Z",
+              "updatedAt": "2026-07-03T08:49:43Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOSaLcns8AAAABE61MFQ",
+          "commit": {
+            "abbreviatedOid": "01bcff5"
+          },
+          "author": "kkohbrok",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-03T10:30:17Z",
+          "updatedAt": "2026-07-03T10:30:17Z",
+          "comments": [
+            {
+              "originalPosition": 84,
+              "body": "Thanks!",
+              "createdAt": "2026-07-03T10:30:17Z",
+              "updatedAt": "2026-07-03T10:30:17Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOSaLcns8AAAABE61cAA",
+          "commit": {
+            "abbreviatedOid": "01bcff5"
+          },
+          "author": "kkohbrok",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-03T10:31:02Z",
+          "updatedAt": "2026-07-03T10:31:02Z",
+          "comments": [
+            {
+              "originalPosition": 47,
+              "body": "Okay, let's merge this for now. We can discuss further in Vienna.",
+              "createdAt": "2026-07-03T10:31:02Z",
+              "updatedAt": "2026-07-03T10:31:02Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOSaLcns8AAAABE62HxQ",
+          "commit": {
+            "abbreviatedOid": "01bcff5"
+          },
+          "author": "kkohbrok",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-03T10:32:54Z",
+          "updatedAt": "2026-07-03T10:32:54Z",
+          "comments": [
+            {
+              "originalPosition": 240,
+              "body": "Okay, then we can probably just remove that sentence alltogether.",
+              "createdAt": "2026-07-03T10:32:54Z",
+              "updatedAt": "2026-07-03T10:32:54Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOSaLcns8AAAABE7I6NA",
+          "commit": {
+            "abbreviatedOid": "01bcff5"
+          },
+          "author": "smyslov",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-03T11:27:13Z",
+          "updatedAt": "2026-07-03T11:27:13Z",
+          "comments": [
+            {
+              "originalPosition": 240,
+              "body": "Done.",
+              "createdAt": "2026-07-03T11:27:13Z",
+              "updatedAt": "2026-07-03T11:27:13Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOSaLcns8AAAABE-tq6Q",
+          "commit": {
+            "abbreviatedOid": "0eaeaf9"
+          },
+          "author": "kkohbrok",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "Thanks! If you want to make the CI happy, you could eliminate that one remaining trailing whitespace. But I can also do that on Monday before publishing the I-D.",
+          "createdAt": "2026-07-04T08:16:15Z",
+          "updatedAt": "2026-07-04T08:16:15Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
