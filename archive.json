@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-07-05T02:22:13.284629+00:00",
+  "timestamp": "2026-07-07T02:22:44.052893+00:00",
   "repo": "kkohbrok/draft-kohbrok-ipsecme-mls-gike",
   "labels": [
     {
@@ -566,25 +566,35 @@
       "id": "PR_kwDOSaLcns7tK56g",
       "title": "Consistensy + few design proposals",
       "url": "https://github.com/kkohbrok/draft-kohbrok-ipsecme-mls-gike/pull/9",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "smyslov",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Mostly editorial changes to keep text consistent, but also few design proposals:\r\n1. Return MLS object to the candidate GM in the GSA_AUTH response on registration. Unless I'm missing something with MLS message sequencing, I think this is more streamlined, the GCKS just delays this response until it contacts the designated GM and receives the commit message.\r\n2. Remove any explicit policy for selecting the designated GM/ Afterall, this is a GCKS' local matter. In particular, one of the condition is that there is a persistent unicast IKE SA from this GM to GCKS\r\n3. Add a limitation that only GMs acting as senders can request Path Refresh. I believe that this is reasonable for two reasons - usually senders are in a better position with regard to how often the key should be changed, sinse they know for sure how much traffic is protected using one key. In addition, there must be a persistent unicast IKE SA to the GCKS, and senders will have it often, as their rekeying must be reliable.\r\n4. Rename new exchanges to always start with GSA_ and to have a relatively short name.",
       "createdAt": "2026-07-02T14:28:05Z",
-      "updatedAt": "2026-07-04T08:16:15Z",
+      "updatedAt": "2026-07-06T06:01:46Z",
       "baseRepository": "kkohbrok/draft-kohbrok-ipsecme-mls-gike",
       "baseRefName": "main",
       "baseRefOid": "fb5117d993f9a043fa538d3c0602ce4a9edf31f5",
       "headRepository": "smyslov/draft-kohbrok-ipsecme-mls-gike",
       "headRefName": "main",
       "headRefOid": "0eaeaf9d040b7fa1e1892128dd5b93ec3be587f9",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "closedAt": "2026-07-06T06:01:46Z",
+      "mergedAt": "2026-07-06T06:01:46Z",
+      "mergedBy": "kkohbrok",
+      "mergeCommit": {
+        "oid": "4ed90de0ef5a1d253b610c6efe42d7ee7b4fc774"
+      },
+      "comments": [
+        {
+          "author": "smyslov",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Thanks! If you want to make the CI happy, you could eliminate that one remaining trailing whitespace. But I can also do that on Monday before publishing the I-D.\r\n\r\nPlease, do (I believe it's easier for you to make the CI happy, than for me, as I have no idea what the CI is, sorry :-)).",
+          "createdAt": "2026-07-06T05:43:56Z",
+          "updatedAt": "2026-07-06T05:45:07Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOSaLcns8AAAABE5HWnw",
